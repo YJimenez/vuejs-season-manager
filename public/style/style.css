@@ -1,0 +1,84 @@
+.container{
+	border: solid #ddd 1px;
+	border-top: none;
+	border-bottom: none;
+	height: 100%;
+}
+/* */
+.search-bar{
+	margin:20px;
+	text-align: center;
+}
+.search-bar input{
+	width: 75%;
+	margin-top: 20px;
+}
+.seasons-menu{
+	width: 100%;
+	text-align: center;
+}
+.seasons-menu button, .seasons-buttons{
+	display: inline-block;
+}
+.seasons-menu button{
+	margin: 10px;
+}
+#episodes-body{
+	border: solid #ddd 1px;
+	display: inline-block;
+	width: 64%;
+	padding: 10px;
+	margin-top: 20px; 
+}
+#episodes-body .episode-details img{
+	max-width: 350px;
+	border: solid #ddd 2px;
+}
+.episode-img, .episode-description{
+	display: inline-block;
+}
+.episode-img{
+	width: 100%;
+	float: right;
+}
+.info, .season-image{
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+}
+.season-image img{
+	width: 100px;
+	margin-left: 20px;
+}
+.episode-description{
+	width: 100%;
+}
+#episodes-list{
+	border: solid #ddd 1px;
+	width: 35%;
+	float: right;
+	padding: 0px 10px;
+	height: 600px;
+	overflow: auto;
+	margin-top: 20px; 
+}
+td.episode-list-img{
+	height: 100%;
+	vertical-align: middle;
+}
+td.episode-list-img img{
+	max-width: 100px;
+}
+td.episode-list-description p{
+	font-size: 10px;
+}
+table.episode{
+	width: 100%;
+	display: block;
+	margin: 10px 0px;
+	vertical-align: middle;
+	border: none;
+}
+table.episode tr{
+	cursor: pointer;
+}

@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="assets/style/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div id="app" class="container">
+			<div>
+				<div class='search-bar'>
+					<h1 v-text='title' v-once></h1>
+					<h6 v-text='subtitle' v-once></h6>
+					<input 
+						v-on:model="searchString"
+						v-on:keyup="filterString"
+					>
+				</div>
+				
+				<div class="seasons-menu">
+					<button 
+						type="button" 
+						:class="{
+							'btn btn-default btn-lg': true,
+							'active': seasonId === '',
+						}"
+						v-on:click="filterEpisodes('')"	>
+						
+						Todas las temporadas
+						<span v-show="seasonId === ''">
+							{{ '( '+episodes.length+ ' )'}}
+						</span>
+					</button>
+					<div class="seasons-buttons" v-for='season in seasons'>
+						<button 
+							type="button" 
+							:class="{
+								'btn btn-default btn-lg': true,
+								'active': season.id === seasonId
+							}"
+							v-on:click="filterEpisodes(season.id)"
+						>
+							{{ season.title.split('- ')[1] }} 
+							<span v-show="season.id === seasonId">
+								{{ '( '+episodes.length+ ' )'}}
+							</span>
+						</button>
+					</div>
+				</div>
+				
+				<section id='episodes-body' 
+					v-show="episodeSelected !== ''"
+					:class="{
+							'background-image': 'url(' + episodeSelected.image_background + ')'
+						}"
+				>
+					<div class="episode-details">
+						<div class="episode-img">
+							<img :src="episodeSelected.image_still" />
+							
+							<div class="season-image"> 
+								<img :src="episodeSelected.image_medium" />
+							</div>
+							
+							<article class="info">
+								<p><b>Duracion:</b> {{ episodeSelected.duration }} </p>
+								<p><b>Año:</b> {{ episodeSelected.year }} </p>
+								<p><b>Nº episodio:</b> {{ episodeSelected.episode_number }} </p>
+							</article>
+						</div>
+						
+						<article class="episode-description">
+							<h3>{{ episodeSelected.title_episode }}</h3>
+							<p>{{ episodeSelected.description_large }}</p>
+						</article>
+					</div>
+				</section>
+				
+				<aside id="episodes-list">
+					<table 
+						class="table table-bordered episode" 
+						v-for='episode in episodes'
+						v-on:click="getEpisodeDescription(episode.id)"
+					>
+						<tr class="active">
+							<td class="episode-list-img">
+								<img :src="episode.image_small" />
+							</td>
+							<td class="episode-list-description">
+								<h6>{{ episode.episode_number }} 
+									- {{ episode.title_episode }}
+								</h6>
+								<p>{{ episode.description }}</p>
+							</td>
+						</tr>
+					</table>
+				</aside>
+			</div>
+		</div>
+	</body>
+	<script src="https://unpkg.com/vue@2.4.1"></script>
+	<script src="assets/app.js"></script>
+	<script>
+		const seasonsArray = <%- JSON.stringify(seasons) %>;
+		initialValues(seasonsArray, '');
+	</script>
+</html>
